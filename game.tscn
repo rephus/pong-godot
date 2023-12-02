@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=3 uid="uid://ddgmw4jghc7ql"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_o50fp"]
+[ext_resource type="Texture2D" uid="uid://bxdmjx202i1s7" path="res://pixel.png" id="2_m78l0"]
+[ext_resource type="Script" path="res://com.gd" id="3_ljppl"]
+[ext_resource type="Script" path="res://ball.gd" id="4_ehb17"]
+[ext_resource type="Script" path="res://score.gd" id="5_meuia"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m0m6c"]
+size = Vector2(12, 78)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" type="Area2D" parent="."]
+position = Vector2(15, 19)
+scale = Vector2(1.6586, 1.00431)
+script = ExtResource("1_o50fp")
+metadata/_edit_group_ = true
+
+[node name="sprite" type="Sprite2D" parent="Player"]
+position = Vector2(7, 39)
+rotation = 3.14159
+scale = Vector2(1.24465, -7.81407)
+texture = ExtResource("2_m78l0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(7, 39)
+shape = SubResource("RectangleShape2D_m0m6c")
+
+[node name="Com" type="Area2D" parent="."]
+position = Vector2(1121, 74)
+scale = Vector2(1.76, 1)
+script = ExtResource("3_ljppl")
+metadata/_edit_group_ = true
+
+[node name="sprite" type="Sprite2D" parent="Com"]
+position = Vector2(7, 39)
+rotation = 3.14159
+scale = Vector2(1.24465, -7.81407)
+texture = ExtResource("2_m78l0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Com"]
+position = Vector2(7, 39)
+shape = SubResource("RectangleShape2D_m0m6c")
+
+[node name="Ball" type="Area2D" parent="."]
+position = Vector2(547, 286)
+scale = Vector2(1, 0.159995)
+script = ExtResource("4_ehb17")
+metadata/_edit_group_ = true
+
+[node name="sprite" type="Sprite2D" parent="Ball"]
+position = Vector2(7, 39)
+rotation = 3.14159
+scale = Vector2(1.24465, -7.81407)
+texture = ExtResource("2_m78l0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+position = Vector2(7, 39)
+shape = SubResource("RectangleShape2D_m0m6c")
+
+[node name="scoreplayer" type="Label" parent="."]
+offset_left = 701.0
+offset_top = 27.0
+offset_right = 741.0
+offset_bottom = 50.0
+text = "0"
+script = ExtResource("5_meuia")
+
+[node name="scorecom" type="Label" parent="."]
+offset_left = 388.0
+offset_top = 27.0
+offset_right = 428.0
+offset_bottom = 50.0
+text = "0"
+script = ExtResource("5_meuia")
+
+[connection signal="area_entered" from="Ball" to="Ball" method="_on_area_entered"]
+[connection signal="comScore" from="Ball" to="scorecom" method="_on_ball_com_score"]
+[connection signal="playerScore" from="Ball" to="scoreplayer" method="_on_ball_player_score"]
